@@ -13,6 +13,7 @@
 		57917B722B41877C00977119 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57917B712B41877C00977119 /* Preview Assets.xcassets */; };
 		E15051F92B44A4D80064B593 /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051F82B44A4D80064B593 /* ContactModel.swift */; };
 		E15051FC2B44A64E0064B593 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051FB2B44A64E0064B593 /* SettingsView.swift */; };
+		E15051FE2B44AD590064B593 /* LargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051FD2B44AD590064B593 /* LargeButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		57917B712B41877C00977119 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E15051F82B44A4D80064B593 /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
 		E15051FB2B44A64E0064B593 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E15051FD2B44AD590064B593 /* LargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		E15051F72B44A42B0064B593 /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
+				E15051FD2B44AD590064B593 /* LargeButton.swift */,
 			);
 			path = CommonViews;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57917B6D2B41877B00977119 /* StartView.swift in Sources */,
+				E15051FE2B44AD590064B593 /* LargeButton.swift in Sources */,
 				E15051FC2B44A64E0064B593 /* SettingsView.swift in Sources */,
 				57917B6B2B41877B00977119 /* MemoLinkApp.swift in Sources */,
 				E15051F92B44A4D80064B593 /* ContactModel.swift in Sources */,

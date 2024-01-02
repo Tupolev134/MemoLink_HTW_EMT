@@ -12,6 +12,7 @@
 		57917B6F2B41877C00977119 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57917B6E2B41877C00977119 /* Assets.xcassets */; };
 		57917B722B41877C00977119 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57917B712B41877C00977119 /* Preview Assets.xcassets */; };
 		E15051F92B44A4D80064B593 /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051F82B44A4D80064B593 /* ContactModel.swift */; };
+		E15051FC2B44A64E0064B593 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051FB2B44A64E0064B593 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		57917B6E2B41877C00977119 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57917B712B41877C00977119 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E15051F82B44A4D80064B593 /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
+		E15051FB2B44A64E0064B593 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		E15051F12B44A33E0064B593 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E15051FA2B44A5C10064B593 /* SettingsView */,
 				E15051F72B44A42B0064B593 /* CommonViews */,
 				E15051F62B44A41F0064B593 /* NFCViews */,
 				E15051F52B44A40E0064B593 /* ContactViews */,
@@ -132,6 +135,14 @@
 			children = (
 			);
 			path = CommonViews;
+			sourceTree = "<group>";
+		};
+		E15051FA2B44A5C10064B593 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				E15051FB2B44A64E0064B593 /* SettingsView.swift */,
+			);
+			path = SettingsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57917B6D2B41877B00977119 /* StartView.swift in Sources */,
+				E15051FC2B44A64E0064B593 /* SettingsView.swift in Sources */,
 				57917B6B2B41877B00977119 /* MemoLinkApp.swift in Sources */,
 				E15051F92B44A4D80064B593 /* ContactModel.swift in Sources */,
 			);

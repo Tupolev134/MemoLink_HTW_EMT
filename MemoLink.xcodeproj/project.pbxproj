@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		57917B6B2B41877B00977119 /* MemoLinkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57917B6A2B41877B00977119 /* MemoLinkApp.swift */; };
-		57917B6D2B41877B00977119 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57917B6C2B41877B00977119 /* ContentView.swift */; };
+		57917B6D2B41877B00977119 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57917B6C2B41877B00977119 /* StartView.swift */; };
 		57917B6F2B41877C00977119 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57917B6E2B41877C00977119 /* Assets.xcassets */; };
 		57917B722B41877C00977119 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57917B712B41877C00977119 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		57917B672B41877B00977119 /* MemoLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57917B6A2B41877B00977119 /* MemoLinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoLinkApp.swift; sourceTree = "<group>"; };
-		57917B6C2B41877B00977119 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		57917B6C2B41877B00977119 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		57917B6E2B41877C00977119 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57917B712B41877C00977119 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,8 +51,11 @@
 		57917B692B41877B00977119 /* MemoLink */ = {
 			isa = PBXGroup;
 			children = (
+				E15051F32B44A3680064B593 /* Controller */,
+				E15051F22B44A34D0064B593 /* ViewModel */,
+				E15051F12B44A33E0064B593 /* View */,
+				E15051F02B44A3350064B593 /* Model */,
 				57917B6A2B41877B00977119 /* MemoLinkApp.swift */,
-				57917B6C2B41877B00977119 /* ContentView.swift */,
 				57917B6E2B41877C00977119 /* Assets.xcassets */,
 				57917B702B41877C00977119 /* Preview Content */,
 			);
@@ -65,6 +68,67 @@
 				57917B712B41877C00977119 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E15051F02B44A3350064B593 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E15051F12B44A33E0064B593 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E15051F72B44A42B0064B593 /* CommonViews */,
+				E15051F62B44A41F0064B593 /* NFCViews */,
+				E15051F52B44A40E0064B593 /* ContactViews */,
+				E15051F42B44A3E30064B593 /* StartView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E15051F22B44A34D0064B593 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E15051F32B44A3680064B593 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E15051F42B44A3E30064B593 /* StartView */ = {
+			isa = PBXGroup;
+			children = (
+				57917B6C2B41877B00977119 /* StartView.swift */,
+			);
+			path = StartView;
+			sourceTree = "<group>";
+		};
+		E15051F52B44A40E0064B593 /* ContactViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ContactViews;
+			sourceTree = "<group>";
+		};
+		E15051F62B44A41F0064B593 /* NFCViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NFCViews;
+			sourceTree = "<group>";
+		};
+		E15051F72B44A42B0064B593 /* CommonViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CommonViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57917B6D2B41877B00977119 /* ContentView.swift in Sources */,
+				57917B6D2B41877B00977119 /* StartView.swift in Sources */,
 				57917B6B2B41877B00977119 /* MemoLinkApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,7 +331,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MemoLink/Preview Content\"";
-				DEVELOPMENT_TEAM = R4PB4GGHPK;
+				DEVELOPMENT_TEAM = JZLT94DZPK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -280,7 +344,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.htw.MemoLink;
+				PRODUCT_BUNDLE_IDENTIFIER = de.cadw.MemoLink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -296,7 +360,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MemoLink/Preview Content\"";
-				DEVELOPMENT_TEAM = R4PB4GGHPK;
+				DEVELOPMENT_TEAM = JZLT94DZPK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -309,7 +373,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.htw.MemoLink;
+				PRODUCT_BUNDLE_IDENTIFIER = de.cadw.MemoLink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

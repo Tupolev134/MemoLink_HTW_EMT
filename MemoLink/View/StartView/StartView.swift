@@ -1,13 +1,6 @@
-//
-//  ContentView.swift
-//  MemoLink
-//
-//  Created by Jonas Glöckner on 31.12.23.
-//
-
 import SwiftUI
 
-struct ContentView: View {
+struct StartView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -19,8 +12,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct StartView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        StartView()
     }
 }

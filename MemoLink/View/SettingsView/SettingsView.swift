@@ -4,8 +4,10 @@ struct SettingsView: View {
     var body: some View {
         VStack{
             Spacer()
-            LargeButton(text: "Contacts") {
-                //show all contacts
+            NavigationLink(destination: ContactsView()) {
+                LargeButton(text: "Contacts", action: {
+                    // passt
+                })
             }
             Spacer()
             LargeButton(text: "New NFC Tag") {
@@ -23,7 +25,7 @@ struct SettingsView: View {
         .foregroundStyle(Color("MemoLinkBlue"))
     }
     
-
+    
 }
 
 #Preview {

@@ -12,7 +12,6 @@ struct SettingsView: View {
     ]
     
     var body: some View {
-        NavigationView {
             List {
                 Section(header: Text("NFC TAGS")) {
                     NavigationLink(destination: AddNfcTagToContactView()) {
@@ -36,10 +35,8 @@ struct SettingsView: View {
             .navigationBarTitle("Settings")
             .toolbarBackground(Color.white, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
-            
-            ContactsView()
-            
-        }
+        
+        
     }
 }
 

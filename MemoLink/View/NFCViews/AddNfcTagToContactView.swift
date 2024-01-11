@@ -5,11 +5,11 @@ struct AddNfcTagToContactView: View {
     @State private var groupedContacts = [String: [CNContact]]()
 
     var body: some View {
+//        Text("Select a contact")
+//            .font(.title2)
+//            .frame(alignment: .leading)
+//            .padding(.top)
         List {
-            Text("Select a contact")
-                .font(.headline)
-                .listRowBackground(Color.clear)
-
             ForEach(groupedContacts.keys.sorted(), id: \.self) { key in
                 Section(header: Text(key)) {
                     ForEach(groupedContacts[key] ?? [], id: \.identifier) { contact in
@@ -20,6 +20,8 @@ struct AddNfcTagToContactView: View {
         }
         .onAppear(perform: loadContacts)
         .listStyle(.insetGrouped)
+        .navigationTitle("Select a contact")
+        .toolbarTitleDisplayMode(.inline)
     }
 
     private func loadContacts() {
@@ -50,5 +52,24 @@ struct AddNfcTagToContactView: View {
                 }
             }
         }
+    }
+}
+
+struct AddNfcTagToContactView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Erstellen Sie hier statische Dummy-Kontakte für die Vorschau
+        var previewContacts = [String: [CNContact]]()
+        let names = ["Alice", "Bob", "Charlie", "David", "Eve"]
+        for name in names {
+            let contact = CNContact()
+            // Normalerweise ist CNContact eine immutable Klasse,
+            // hier nur für die Vorschau simuliert
+            let mutableContact = contact.mutableCopy() as! CNMutableContact
+            mutableContact.givenName = name
+            let key = String(name.prefix(1))
+            previewContacts[key, default: []].append(mutableContact.copy() as! CNContact)
+        }
+
+        return AddNfcTagToContactView()
     }
 }

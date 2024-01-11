@@ -33,4 +33,25 @@ class CNContactsController {
             }
         }
     }
+    
+    func fetchContactName(identifier: String, completion: @escaping (Result<String, Error>) -> Void) {
+            let keysToFetch: [CNKeyDescriptor] = [
+                CNContactGivenNameKey as CNKeyDescriptor,
+                CNContactFamilyNameKey as CNKeyDescriptor
+            ]
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                do {
+                    let contact = try self.store.unifiedContact(withIdentifier: identifier, keysToFetch: keysToFetch)
+                    let name = contact.givenName + " " + contact.familyName
+                    DispatchQueue.main.async {
+                        completion(.success(name))
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                }
+            }
+        }
 }

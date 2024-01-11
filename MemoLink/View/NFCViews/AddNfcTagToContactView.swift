@@ -5,15 +5,15 @@ struct AddNfcTagToContactView: View {
     @State private var groupedContacts = [String: [CNContact]]()
 
     var body: some View {
-//        Text("Select a contact")
-//            .font(.title2)
-//            .frame(alignment: .leading)
-//            .padding(.top)
         List {
             ForEach(groupedContacts.keys.sorted(), id: \.self) { key in
                 Section(header: Text(key)) {
                     ForEach(groupedContacts[key] ?? [], id: \.identifier) { contact in
-                        Text(contact.givenName + " " + contact.familyName)
+                        NavigationLink {
+                            ScanNFCTagView(contactIdentifier: contact.identifier)
+                        } label: {
+                            Text(contact.givenName + " " + contact.familyName)
+                        }
                     }
                 }
             }
@@ -30,7 +30,7 @@ struct AddNfcTagToContactView: View {
         DispatchQueue.global(qos: .userInitiated).async {
             store.requestAccess(for: .contacts) { granted, error in
                 if let error = error {
-                    print("Fehler beim Zugriff auf Kontakte: \(error)")
+                    print("Error getting contacts: \(error)")
                     return
                 }
 

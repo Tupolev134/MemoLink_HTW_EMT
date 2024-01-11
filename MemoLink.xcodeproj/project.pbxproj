@@ -11,10 +11,13 @@
 		57917B6D2B41877B00977119 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57917B6C2B41877B00977119 /* StartView.swift */; };
 		57917B6F2B41877C00977119 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57917B6E2B41877C00977119 /* Assets.xcassets */; };
 		57917B722B41877C00977119 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57917B712B41877C00977119 /* Preview Assets.xcassets */; };
+		E113CDFF2B4FEBF400EA3A87 /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CDFE2B4FEBF400EA3A87 /* ContactDetailView.swift */; };
+		E113CE012B4FED0400EA3A87 /* AddNfcTagToContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CE002B4FED0400EA3A87 /* AddNfcTagToContactView.swift */; };
 		E15051F92B44A4D80064B593 /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051F82B44A4D80064B593 /* ContactModel.swift */; };
 		E15051FC2B44A64E0064B593 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051FB2B44A64E0064B593 /* SettingsView.swift */; };
 		E15051FE2B44AD590064B593 /* LargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051FD2B44AD590064B593 /* LargeButton.swift */; };
 		E15052002B44B1EF0064B593 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051FF2B44B1EF0064B593 /* ContactsView.swift */; };
+		E1A5DD9B2B4EF05E00B53078 /* LargeNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A5DD9A2B4EF05E00B53078 /* LargeNavButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,10 +26,13 @@
 		57917B6C2B41877B00977119 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		57917B6E2B41877C00977119 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57917B712B41877C00977119 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E113CDFE2B4FEBF400EA3A87 /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailView.swift; sourceTree = "<group>"; };
+		E113CE002B4FED0400EA3A87 /* AddNfcTagToContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNfcTagToContactView.swift; sourceTree = "<group>"; };
 		E15051F82B44A4D80064B593 /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
 		E15051FB2B44A64E0064B593 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E15051FD2B44AD590064B593 /* LargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButton.swift; sourceTree = "<group>"; };
 		E15051FF2B44B1EF0064B593 /* ContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsView.swift; sourceTree = "<group>"; };
+		E1A5DD9A2B4EF05E00B53078 /* LargeNavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeNavButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				E15051FF2B44B1EF0064B593 /* ContactsView.swift */,
+				E113CDFE2B4FEBF400EA3A87 /* ContactDetailView.swift */,
 			);
 			path = ContactViews;
 			sourceTree = "<group>";
@@ -131,6 +138,7 @@
 		E15051F62B44A41F0064B593 /* NFCViews */ = {
 			isa = PBXGroup;
 			children = (
+				E113CE002B4FED0400EA3A87 /* AddNfcTagToContactView.swift */,
 			);
 			path = NFCViews;
 			sourceTree = "<group>";
@@ -139,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				E15051FD2B44AD590064B593 /* LargeButton.swift */,
+				E1A5DD9A2B4EF05E00B53078 /* LargeNavButton.swift */,
 			);
 			path = CommonViews;
 			sourceTree = "<group>";
@@ -223,7 +232,10 @@
 			files = (
 				57917B6D2B41877B00977119 /* StartView.swift in Sources */,
 				E15051FE2B44AD590064B593 /* LargeButton.swift in Sources */,
+				E1A5DD9B2B4EF05E00B53078 /* LargeNavButton.swift in Sources */,
 				E15051FC2B44A64E0064B593 /* SettingsView.swift in Sources */,
+				E113CE012B4FED0400EA3A87 /* AddNfcTagToContactView.swift in Sources */,
+				E113CDFF2B4FEBF400EA3A87 /* ContactDetailView.swift in Sources */,
 				E15052002B44B1EF0064B593 /* ContactsView.swift in Sources */,
 				57917B6B2B41877B00977119 /* MemoLinkApp.swift in Sources */,
 				E15051F92B44A4D80064B593 /* ContactModel.swift in Sources */,
@@ -360,12 +372,13 @@
 				DEVELOPMENT_TEAM = JZLT94DZPK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Allow contact access";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -391,12 +404,13 @@
 				DEVELOPMENT_TEAM = JZLT94DZPK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Allow contact access";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

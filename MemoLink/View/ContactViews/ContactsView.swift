@@ -13,20 +13,29 @@ struct ContactsView: View {
 
     private func loadContacts() {
         let store = CNContactStore()
-        store.requestAccess(for: .contacts) { granted, error in
-            if let error = error {
-                print("Fehler beim Zugriff auf Kontakte: \(error)")
-                return
-            }
 
-            if granted {
-                let keys = [CNContactGivenNameKey, CNContactFamilyNameKey]
-                let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
-                
-                try? store.enumerateContacts(with: request) { contact, stop in
-                    contacts.append(contact)
+        DispatchQueue.global(qos: .userInitiated).async {
+            store.requestAccess(for: .contacts) { granted, error in
+                if let error = error {
+                    print("Fehler beim Zugriff auf Kontakte: \(error)")
+                    return
+                }
+
+                if granted {
+                    let keys = [CNContactGivenNameKey, CNContactFamilyNameKey]
+                    let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
+
+                    var fetchedContacts = [CNContact]()
+                    try? store.enumerateContacts(with: request) { contact, stop in
+                        fetchedContacts.append(contact)
+                    }
+
+                    DispatchQueue.main.async {
+                        self.contacts = fetchedContacts
+                    }
                 }
             }
         }
     }
+
 }

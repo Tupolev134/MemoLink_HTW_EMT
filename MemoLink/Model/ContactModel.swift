@@ -1,17 +1,40 @@
+import Contacts
 import Foundation
 
 struct Contact: Identifiable {
-    var id = UUID()        // eventuell NFC-Tag-ID
-    var name: String
-    var phoneNumber: String?
-    var birthday: Date?
-    var nfcTagIdentifier: String?
+    var id: UUID
+    var contactIdentifier: String
+    var nfcTagID: String?
 
-    init(name: String, phoneNumber: String? = nil, email: String? = nil, birthday: Date? = nil, nfcTagIdentifier: String? = nil) {
-        self.name = name
-        self.phoneNumber = phoneNumber
-        self.birthday = birthday
-        self.nfcTagIdentifier = nfcTagIdentifier
+    init(contactIdentifier: String, nfcTagID: String? = nil) {
+        self.id = UUID()
+        self.contactIdentifier = contactIdentifier
+        self.nfcTagID = nfcTagID
     }
+}
 
+class ContactManager {
+    let store = CNContactStore()
+
+    func fetchContactDetails(identifier: String, completion: @escaping (Result<CNContact, Error>) -> Void) {
+        let keysToFetch: [CNKeyDescriptor] = [
+            CNContactGivenNameKey as CNKeyDescriptor,
+            CNContactFamilyNameKey as CNKeyDescriptor,
+            CNContactPhoneNumbersKey as CNKeyDescriptor,
+            CNContactBirthdayKey as CNKeyDescriptor
+        ]
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                let contact = try self.store.unifiedContact(withIdentifier: identifier, keysToFetch: keysToFetch)
+                DispatchQueue.main.async {
+                    completion(.success(contact))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
 }

@@ -12,7 +12,7 @@ struct LargeButton: View {
                 .frame(maxWidth: .infinity)
                 .frame(height: 150)
                 .foregroundColor(Color("BG"))
-                .background(Color("MemoLinkBlue"))
+                .background(Color.black)
                 .cornerRadius(10)
         }
         .padding()

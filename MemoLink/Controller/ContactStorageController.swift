@@ -1,7 +1,7 @@
 import Foundation
 
-class ContactStorage {
-    static let shared = ContactStorage()
+class ContactStorageController {
+    static let shared = ContactStorageController()
     private let fileURL: URL
 
     init() {

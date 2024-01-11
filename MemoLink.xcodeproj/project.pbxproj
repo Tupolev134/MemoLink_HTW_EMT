@@ -14,8 +14,9 @@
 		E113CDFF2B4FEBF400EA3A87 /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CDFE2B4FEBF400EA3A87 /* ContactDetailView.swift */; };
 		E113CE012B4FED0400EA3A87 /* AddNfcTagToContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CE002B4FED0400EA3A87 /* AddNfcTagToContactView.swift */; };
 		E113CE032B5007D800EA3A87 /* ScanNFCTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CE022B5007D800EA3A87 /* ScanNFCTagView.swift */; };
-		E113CE062B500C1900EA3A87 /* ContactStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CE052B500C1900EA3A87 /* ContactStorage.swift */; };
+		E113CE062B500C1900EA3A87 /* ContactStorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CE052B500C1900EA3A87 /* ContactStorageController.swift */; };
 		E113CE082B500C8700EA3A87 /* Contacts.json in Resources */ = {isa = PBXBuildFile; fileRef = E113CE072B500C8700EA3A87 /* Contacts.json */; };
+		E113CE0A2B5010AE00EA3A87 /* CNContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CE092B5010AE00EA3A87 /* CNContactsController.swift */; };
 		E15051F92B44A4D80064B593 /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051F82B44A4D80064B593 /* ContactModel.swift */; };
 		E15051FC2B44A64E0064B593 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051FB2B44A64E0064B593 /* SettingsView.swift */; };
 		E15051FE2B44AD590064B593 /* LargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051FD2B44AD590064B593 /* LargeButton.swift */; };
@@ -32,8 +33,9 @@
 		E113CDFE2B4FEBF400EA3A87 /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailView.swift; sourceTree = "<group>"; };
 		E113CE002B4FED0400EA3A87 /* AddNfcTagToContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNfcTagToContactView.swift; sourceTree = "<group>"; };
 		E113CE022B5007D800EA3A87 /* ScanNFCTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNFCTagView.swift; sourceTree = "<group>"; };
-		E113CE052B500C1900EA3A87 /* ContactStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStorage.swift; sourceTree = "<group>"; };
+		E113CE052B500C1900EA3A87 /* ContactStorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStorageController.swift; sourceTree = "<group>"; };
 		E113CE072B500C8700EA3A87 /* Contacts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Contacts.json; sourceTree = "<group>"; };
+		E113CE092B5010AE00EA3A87 /* CNContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNContactsController.swift; sourceTree = "<group>"; };
 		E15051F82B44A4D80064B593 /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
 		E15051FB2B44A64E0064B593 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E15051FD2B44AD590064B593 /* LargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButton.swift; sourceTree = "<group>"; };
@@ -94,7 +96,6 @@
 		E113CE042B500BFD00EA3A87 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				E113CE052B500C1900EA3A87 /* ContactStorage.swift */,
 				E113CE072B500C8700EA3A87 /* Contacts.json */,
 			);
 			path = Storage;
@@ -130,6 +131,8 @@
 		E15051F32B44A3680064B593 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E113CE052B500C1900EA3A87 /* ContactStorageController.swift */,
+				E113CE092B5010AE00EA3A87 /* CNContactsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57917B6D2B41877B00977119 /* StartView.swift in Sources */,
+				E113CE0A2B5010AE00EA3A87 /* CNContactsController.swift in Sources */,
 				E15051FE2B44AD590064B593 /* LargeButton.swift in Sources */,
 				E1A5DD9B2B4EF05E00B53078 /* LargeNavButton.swift in Sources */,
 				E15051FC2B44A64E0064B593 /* SettingsView.swift in Sources */,
@@ -258,7 +262,7 @@
 				E15052002B44B1EF0064B593 /* ContactsView.swift in Sources */,
 				57917B6B2B41877B00977119 /* MemoLinkApp.swift in Sources */,
 				E15051F92B44A4D80064B593 /* ContactModel.swift in Sources */,
-				E113CE062B500C1900EA3A87 /* ContactStorage.swift in Sources */,
+				E113CE062B500C1900EA3A87 /* ContactStorageController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

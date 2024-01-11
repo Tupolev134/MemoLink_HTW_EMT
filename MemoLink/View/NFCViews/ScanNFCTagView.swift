@@ -12,10 +12,9 @@ struct ScanNFCTagView: View {
         }
         .alert(isPresented: $showAlert) {
             Alert(
-                title: Text("Erfolg"),
-                message: Text("Kontakt erfolgreich gespeichert"),
-                dismissButton: .default(Text("OK")) {
-                    // Schließt die aktuelle Ansicht beim Tippen auf "OK"
+                title: Text("Success"),
+                message: Text("Contact successfully saved"),
+                dismissButton: .default(Text("Okay")) {
                     presentationMode.wrappedValue.dismiss()
                 }
             )
@@ -24,8 +23,7 @@ struct ScanNFCTagView: View {
 
     func saveContact() {
         let newContact = Contact(contactIdentifier: contactIdentifier, nfcTagID: dummyNfcTagID)
-        ContactStorage.shared.save(contacts: [newContact])
-        // Zeigt den Alert an, nachdem der Kontakt gespeichert wurde
+        ContactStorageController.shared.save(contacts: [newContact])
         showAlert = true
     }
 }

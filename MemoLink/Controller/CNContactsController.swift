@@ -54,4 +54,46 @@ class CNContactsController {
                 }
             }
         }
+    
+    func fetchContactDetails(identifier: String, completion: @escaping (Result<CNContact, Error>) -> Void) {
+        let keysToFetch: [CNKeyDescriptor] = [
+            CNContactGivenNameKey as CNKeyDescriptor,
+            CNContactFamilyNameKey as CNKeyDescriptor,
+            CNContactPhoneNumbersKey as CNKeyDescriptor,
+            CNContactEmailAddressesKey as CNKeyDescriptor,
+            CNContactBirthdayKey as CNKeyDescriptor,
+            CNContactImageDataKey as CNKeyDescriptor
+        ]
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                let contact = try self.store.unifiedContact(withIdentifier: identifier, keysToFetch: keysToFetch)
+                DispatchQueue.main.async {
+                    completion(.success(contact))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func saveContactChanges(contact: CNMutableContact, completion: @escaping (Result<Void, Error>) -> Void) {
+            let saveRequest = CNSaveRequest()
+            saveRequest.update(contact)
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                do {
+                    try self.store.execute(saveRequest)
+                    DispatchQueue.main.async {
+                        completion(.success(()))
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                }
+            }
+        }
 }

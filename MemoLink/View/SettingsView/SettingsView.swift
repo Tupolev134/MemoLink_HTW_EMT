@@ -2,17 +2,6 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject var contactStorage = ContactStorageController.shared
-
-    let dummyContacts = [
-        Contact(contactIdentifier: "Eleanor", nfcTagID: "nfc1"),
-        Contact(contactIdentifier: "Frederick", nfcTagID: "nfc2"),
-        Contact(contactIdentifier: "Beatrice", nfcTagID: "nfc3"),
-        Contact(contactIdentifier: "Archibald", nfcTagID: "nfc4"),
-        Contact(contactIdentifier: "Harriet", nfcTagID: "nfc5"),
-        Contact(contactIdentifier: "Theodore", nfcTagID: "nfc6")
-    ]
-    
-    @State private var savedContacts = [Contact]()
     @State private var contactNames = [String: String]()
     
     var body: some View {
@@ -20,17 +9,21 @@ struct SettingsView: View {
         List {
             Section(header: Text("NFC TAGS")) {
                 NavigationLink(destination: AddNfcTagToContactView()) {
-                    Text("Add NFC tag to contact")
+                    Text("Add NFC tag to existing contact")
                 }
                 NavigationLink(destination: RemoveNfcTagView()) {
                     Text("Clear NFC tag")
+                }
+                NavigationLink(destination: RemoveNfcTagView()) {
+                    Text("Add new contact")
                 }
             }
             
             
             Section(header: Text("nfc CONTACTS")) {
-                ForEach(contactStorage.contacts) { contact in
-                    NavigationLink(destination: ContactDetailView()) {
+                ForEach($contactStorage.contacts) { $contact in
+//                    NavigationLink(destination: ContactDetailView()) {
+                    NavigationLink(destination: EditContactView(contact: $contact)) {
                         Text(contactNames[contact.contactIdentifier] ?? "Unbekannt")
                     }
                     .onAppear {
@@ -41,16 +34,14 @@ struct SettingsView: View {
         }
         .onAppear(perform: contactStorage.load)
         .listStyle(.insetGrouped)
+        .navigationBarTitleDisplayMode(.large)
         .navigationBarTitle("Settings")
         .toolbarBackground(Color.white, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         
         
     }
-//    private func loadSavedContacts(){
-//        savedContacts = ContactStorageController().load()
-//    }
-//    
+    
     private func loadContactName(contactIdentifier: String) {
         CNContactsController.shared.fetchContactName(identifier: contactIdentifier) { result in
             DispatchQueue.main.async {

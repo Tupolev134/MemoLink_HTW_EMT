@@ -12,29 +12,3 @@ struct Contact: Identifiable, Codable {
         self.nfcTagID = nfcTagID
     }
 }
-
-//class ContactManager {
-//    let store = CNContactStore()
-//
-//    func fetchContactDetails(identifier: String, completion: @escaping (Result<CNContact, Error>) -> Void) {
-//        let keysToFetch: [CNKeyDescriptor] = [
-//            CNContactGivenNameKey as CNKeyDescriptor,
-//            CNContactFamilyNameKey as CNKeyDescriptor,
-//            CNContactPhoneNumbersKey as CNKeyDescriptor,
-//            CNContactBirthdayKey as CNKeyDescriptor
-//        ]
-//
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            do {
-//                let contact = try self.store.unifiedContact(withIdentifier: identifier, keysToFetch: keysToFetch)
-//                DispatchQueue.main.async {
-//                    completion(.success(contact))
-//                }
-//            } catch {
-//                DispatchQueue.main.async {
-//                    completion(.failure(error))
-//                }
-//            }
-//        }
-//    }
-//}

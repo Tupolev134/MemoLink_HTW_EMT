@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct SettingsView: View {
-    
+    @ObservedObject var contactStorage = ContactStorageController.shared
+
     let dummyContacts = [
         Contact(contactIdentifier: "Eleanor", nfcTagID: "nfc1"),
         Contact(contactIdentifier: "Frederick", nfcTagID: "nfc2"),
@@ -28,7 +29,7 @@ struct SettingsView: View {
             
             
             Section(header: Text("nfc CONTACTS")) {
-                ForEach(savedContacts) { contact in
+                ForEach(contactStorage.contacts) { contact in
                     NavigationLink(destination: ContactDetailView()) {
                         Text(contactNames[contact.contactIdentifier] ?? "Unbekannt")
                     }
@@ -38,7 +39,7 @@ struct SettingsView: View {
                 }
             }
         }
-        .onAppear(perform: loadSavedContacts)
+        .onAppear(perform: contactStorage.load)
         .listStyle(.insetGrouped)
         .navigationBarTitle("Settings")
         .toolbarBackground(Color.white, for: .navigationBar)
@@ -46,10 +47,10 @@ struct SettingsView: View {
         
         
     }
-    private func loadSavedContacts(){
-        savedContacts = ContactStorageController().load()
-    }
-    
+//    private func loadSavedContacts(){
+//        savedContacts = ContactStorageController().load()
+//    }
+//    
     private func loadContactName(contactIdentifier: String) {
         CNContactsController.shared.fetchContactName(identifier: contactIdentifier) { result in
             DispatchQueue.main.async {

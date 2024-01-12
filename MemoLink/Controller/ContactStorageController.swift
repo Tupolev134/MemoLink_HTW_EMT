@@ -1,15 +1,18 @@
 import Foundation
 
-class ContactStorageController {
+class ContactStorageController: ObservableObject {
     static let shared = ContactStorageController()
     private let fileURL: URL
+    @Published var contacts: [Contact] = []
 
     init() {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         fileURL = documentsDirectory.appendingPathComponent("contacts.json")
+        load()
     }
 
-    func save(contacts: [Contact]) {
+    func save(newContact: Contact) {
+        contacts.append(newContact)
         do {
             let data = try JSONEncoder().encode(contacts)
             try data.write(to: fileURL)
@@ -18,13 +21,12 @@ class ContactStorageController {
         }
     }
 
-    func load() -> [Contact] {
+    func load() {
         do {
             let data = try Data(contentsOf: fileURL)
-            return try JSONDecoder().decode([Contact].self, from: data)
+            contacts = try JSONDecoder().decode([Contact].self, from: data)
         } catch {
             print("Error loading contacts: \(error)")
-            return []
         }
     }
 }

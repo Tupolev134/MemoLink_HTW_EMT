@@ -2,17 +2,6 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject var contactStorage = ContactStorageController.shared
-
-    let dummyContacts = [
-        Contact(contactIdentifier: "Eleanor", nfcTagID: "nfc1"),
-        Contact(contactIdentifier: "Frederick", nfcTagID: "nfc2"),
-        Contact(contactIdentifier: "Beatrice", nfcTagID: "nfc3"),
-        Contact(contactIdentifier: "Archibald", nfcTagID: "nfc4"),
-        Contact(contactIdentifier: "Harriet", nfcTagID: "nfc5"),
-        Contact(contactIdentifier: "Theodore", nfcTagID: "nfc6")
-    ]
-    
-    @State private var savedContacts = [Contact]()
     @State private var contactNames = [String: String]()
     
     var body: some View {

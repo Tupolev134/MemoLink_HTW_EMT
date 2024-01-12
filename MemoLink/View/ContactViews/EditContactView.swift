@@ -7,7 +7,7 @@ struct EditContactView: View {
     @State private var firstName: String = ""
     @State private var lastName: String = ""
     @State private var phoneNumber: String = ""
-    @State private var birthday: String = ""
+    @State private var birthday: Date = Date()
     @ObservedObject var contactStorage = ContactStorageController.shared
     @State private var showingUpdateAlert = false
     @State private var updateAlertMessage = ""
@@ -23,6 +23,11 @@ struct EditContactView: View {
             
             Section(header: Text("Phone")) {
                 TextField("Phone", text: $phoneNumber)
+            }
+            
+            Section(header: Text("Birthday")) {
+                DatePicker("Birthday", selection: $birthday, displayedComponents: .date)
+                    .datePickerStyle(WheelDatePickerStyle())
             }
             
             Section {
@@ -71,9 +76,7 @@ struct EditContactView: View {
                 self.lastName = cnContact.familyName
                 self.phoneNumber = cnContact.phoneNumbers.first?.value.stringValue ?? ""
                 if let birthdayDate = cnContact.birthday?.date {
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateStyle = .long
-                    self.birthday = dateFormatter.string(from: birthdayDate)
+                    self.birthday = birthdayDate
                 }
             case .failure(let error):
                 print("Error fetching contact details: \(error)")
@@ -97,6 +100,9 @@ struct EditContactView: View {
                 let phoneValue = CNPhoneNumber(stringValue: phoneNumber)
                 let labeledValue = CNLabeledValue(label: CNLabelPhoneNumberMobile, value: phoneValue)
                 mutableContact.phoneNumbers = [labeledValue]
+                let calendar = Calendar.current
+                let dateComponents = calendar.dateComponents([.year, .month, .day], from: birthday)
+                mutableContact.birthday = dateComponents
                 
                 CNContactsController.shared.saveContactChanges(contact: mutableContact) { saveResult in
                     DispatchQueue.main.async {

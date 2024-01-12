@@ -9,17 +9,21 @@ struct SettingsView: View {
         List {
             Section(header: Text("NFC TAGS")) {
                 NavigationLink(destination: AddNfcTagToContactView()) {
-                    Text("Add NFC tag to contact")
+                    Text("Add NFC tag to existing contact")
                 }
                 NavigationLink(destination: RemoveNfcTagView()) {
                     Text("Clear NFC tag")
+                }
+                NavigationLink(destination: RemoveNfcTagView()) {
+                    Text("Add new contact")
                 }
             }
             
             
             Section(header: Text("nfc CONTACTS")) {
-                ForEach(contactStorage.contacts) { contact in
-                    NavigationLink(destination: ContactDetailView()) {
+                ForEach($contactStorage.contacts) { $contact in
+//                    NavigationLink(destination: ContactDetailView()) {
+                    NavigationLink(destination: EditContactView(contact: $contact)) {
                         Text(contactNames[contact.contactIdentifier] ?? "Unbekannt")
                     }
                     .onAppear {
@@ -36,10 +40,7 @@ struct SettingsView: View {
         
         
     }
-//    private func loadSavedContacts(){
-//        savedContacts = ContactStorageController().load()
-//    }
-//    
+    
     private func loadContactName(contactIdentifier: String) {
         CNContactsController.shared.fetchContactName(identifier: contactIdentifier) { result in
             DispatchQueue.main.async {

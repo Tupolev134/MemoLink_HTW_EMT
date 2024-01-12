@@ -7,6 +7,7 @@ struct EditContactView: View {
     @State private var firstName: String = ""
     @State private var lastName: String = ""
     @State private var phoneNumber: String = ""
+    @State private var birthday: String = ""
     @ObservedObject var contactStorage = ContactStorageController.shared
     @State private var showingUpdateAlert = false
     @State private var updateAlertMessage = ""
@@ -69,6 +70,11 @@ struct EditContactView: View {
                 self.firstName = cnContact.givenName
                 self.lastName = cnContact.familyName
                 self.phoneNumber = cnContact.phoneNumbers.first?.value.stringValue ?? ""
+                if let birthdayDate = cnContact.birthday?.date {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateStyle = .long
+                    self.birthday = dateFormatter.string(from: birthdayDate)
+                }
             case .failure(let error):
                 print("Error fetching contact details: \(error)")
             }
@@ -98,7 +104,6 @@ struct EditContactView: View {
                         case .success:
                             self.updateAlertMessage = "Contact was successfully updated."
                             self.showingUpdateAlert = true
-                            // The alert dismissal action will handle popping the view
                         case .failure(let error):
                             self.updateAlertMessage = "Failed to update contact: \(error.localizedDescription)"
                             self.showingUpdateAlert = true

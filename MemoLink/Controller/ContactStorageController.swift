@@ -46,6 +46,10 @@ class ContactStorageController: ObservableObject {
         }
     }
     
+    func getContact(byNfcTagId nfcTagId: String) -> Contact? {
+        return contacts.first { $0.nfcTagID == nfcTagId }
+    }
+    
     func delete(contact: Contact) {
         contacts.removeAll { $0.id == contact.id }
         save()

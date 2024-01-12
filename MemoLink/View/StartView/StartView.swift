@@ -1,9 +1,12 @@
 import SwiftUI
 
 struct StartView: View {
+    @ObservedObject var contactStorage = ContactStorageController.shared
+
     var body: some View {
         NavigationStack {
             VStack {
+                Spacer()
                 Image(systemName: "shareplay")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -15,10 +18,11 @@ struct StartView: View {
                     .frame(alignment: .center)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .padding()
+                Spacer()
+                NavigationLink(destination: ContactView(contact: contactStorage.getContact(byNfcTagId: "dummy-nfc-tag-id") ?? Contact.defaultContact)) {
+                            Text("Scan")
+                        }
             }
-            
-            
-            
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
                     NavigationLink{

@@ -2,40 +2,77 @@ import Contacts
 import SwiftUI
 
 struct ContactView: View {
-    @State private var contacts: [CNContact] = []
+    var contact: Contact
+    @State private var firstName: String = ""
+    @State private var lastName: String = ""
+    @State private var phoneNumber: String = ""
+    @State private var birthday: String = ""
+    @ObservedObject var contactStorage = ContactStorageController.shared
     
     var body: some View {
-        List(contacts, id: \.identifier) { contact in
-            Text(contact.givenName + " " + contact.familyName)
+        VStack(alignment: .leading){
+            Text("*\(birthday)")
+                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .padding(.horizontal)
+            Spacer()
+            LargeButton(text: "Call \(firstName)") {
+                makePhoneCall(phoneNumber: phoneNumber)
+            }
+            Spacer()
+            LargeButton(text: "Text \(firstName)") {
+                textContact()
+            }
+            Spacer()
+            LargeButton(text: "Show chat") {
+                showChat()
+            }
+            Spacer()
         }
-        .onAppear(perform: loadContacts)
+        .onAppear{loadContactDetails()}
+        .navigationTitle(firstName + " " + lastName)
+        .navigationBarTitleDisplayMode(.large)
     }
-
-    private func loadContacts() {
-        let store = CNContactStore()
-
-        DispatchQueue.global(qos: .userInitiated).async {
-            store.requestAccess(for: .contacts) { granted, error in
-                if let error = error {
-                    print("Fehler beim Zugriff auf Kontakte: \(error)")
-                    return
+    
+    private func loadContactDetails() {
+        CNContactsController.shared.fetchContactDetails(identifier: contact.contactIdentifier) { result in
+            switch result {
+            case .success(let cnContact):
+                self.firstName = cnContact.givenName
+                self.lastName = cnContact.familyName
+                self.phoneNumber = cnContact.phoneNumbers.first?.value.stringValue ?? ""
+                if let birthdayDate = cnContact.birthday?.date {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateStyle = .long
+                    self.birthday = dateFormatter.string(from: birthdayDate)
                 }
-
-                if granted {
-                    let keys = [CNContactGivenNameKey, CNContactFamilyNameKey]
-                    let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
-
-                    var fetchedContacts = [CNContact]()
-                    try? store.enumerateContacts(with: request) { contact, stop in
-                        fetchedContacts.append(contact)
-                    }
-
-                    DispatchQueue.main.async {
-                        self.contacts = fetchedContacts
-                    }
-                }
+            case .failure(let error):
+                print("Error fetching contact details: \(error)")
             }
         }
     }
-
+    
+    func makePhoneCall(phoneNumber: String) {
+        guard let url = URL(string: "tel://\(phoneNumber)"),
+              UIApplication.shared.canOpenURL(url) else {
+            return
+        }
+        
+        UIApplication.shared.open(url)
+    }
+    
+    func textContact(){
+        print("text")
+    }
+    
+    func showChat(){
+        let whatsappURL = URL(string: "https://wa.me/\(phoneNumber)")
+        
+        if let url = whatsappURL, UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else {
+            print("WhatsApp is not installed or unknown number")
+        }
+    }
 }
+
+

@@ -5,9 +5,9 @@ struct StartView: View {
         NavigationStack {
             VStack {
                 Image(systemName: "shareplay")
-                    .resizable() // Ermöglicht die Anpassung der Größe des Symbols
-                    .aspectRatio(contentMode: .fit) // Erhält das Seitenverhältnis des Symbols
-                    .frame(width: 60, height: 60) // Hier können Sie die gewünschte Größe angeben
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 60, height: 60)
                     .foregroundColor(.accentColor)
                 Text("Hold your phone near a image of a person")
                     .multilineTextAlignment(.center)
@@ -29,9 +29,7 @@ struct StartView: View {
                     
                 }
             }
-            .navigationTitle("MemoLink")
-            .toolbarBackground(Color.white, for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
+            
         }
     }
 }

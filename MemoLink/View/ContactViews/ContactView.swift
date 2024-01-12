@@ -1,7 +1,7 @@
 import Contacts
 import SwiftUI
 
-struct ContactsView: View {
+struct ContactView: View {
     @State private var contacts: [CNContact] = []
     
     var body: some View {

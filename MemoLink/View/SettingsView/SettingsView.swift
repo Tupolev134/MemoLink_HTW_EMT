@@ -34,6 +34,7 @@ struct SettingsView: View {
         }
         .onAppear(perform: contactStorage.load)
         .listStyle(.insetGrouped)
+        .navigationBarTitleDisplayMode(.large)
         .navigationBarTitle("Settings")
         .toolbarBackground(Color.white, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)

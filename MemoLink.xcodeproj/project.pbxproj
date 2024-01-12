@@ -21,7 +21,7 @@
 		E15051F92B44A4D80064B593 /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051F82B44A4D80064B593 /* ContactModel.swift */; };
 		E15051FC2B44A64E0064B593 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051FB2B44A64E0064B593 /* SettingsView.swift */; };
 		E15051FE2B44AD590064B593 /* LargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051FD2B44AD590064B593 /* LargeButton.swift */; };
-		E15052002B44B1EF0064B593 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051FF2B44B1EF0064B593 /* ContactsView.swift */; };
+		E15052002B44B1EF0064B593 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15051FF2B44B1EF0064B593 /* ContactView.swift */; };
 		E1A5DD9B2B4EF05E00B53078 /* LargeNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A5DD9A2B4EF05E00B53078 /* LargeNavButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +41,7 @@
 		E15051F82B44A4D80064B593 /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
 		E15051FB2B44A64E0064B593 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E15051FD2B44AD590064B593 /* LargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButton.swift; sourceTree = "<group>"; };
-		E15051FF2B44B1EF0064B593 /* ContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsView.swift; sourceTree = "<group>"; };
+		E15051FF2B44B1EF0064B593 /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 		E1A5DD9A2B4EF05E00B53078 /* LargeNavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeNavButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,7 +150,7 @@
 		E15051F52B44A40E0064B593 /* ContactViews */ = {
 			isa = PBXGroup;
 			children = (
-				E15051FF2B44B1EF0064B593 /* ContactsView.swift */,
+				E15051FF2B44B1EF0064B593 /* ContactView.swift */,
 				E113CDFE2B4FEBF400EA3A87 /* ContactDetailView.swift */,
 				E10F14A62B517B4800E8EA97 /* EditContactView.swift */,
 			);
@@ -263,7 +263,7 @@
 				E10F14A72B517B4800E8EA97 /* EditContactView.swift in Sources */,
 				E113CDFF2B4FEBF400EA3A87 /* ContactDetailView.swift in Sources */,
 				E113CE032B5007D800EA3A87 /* ScanNFCTagView.swift in Sources */,
-				E15052002B44B1EF0064B593 /* ContactsView.swift in Sources */,
+				E15052002B44B1EF0064B593 /* ContactView.swift in Sources */,
 				57917B6B2B41877B00977119 /* MemoLinkApp.swift in Sources */,
 				E15051F92B44A4D80064B593 /* ContactModel.swift in Sources */,
 				E113CE062B500C1900EA3A87 /* ContactStorageController.swift in Sources */,

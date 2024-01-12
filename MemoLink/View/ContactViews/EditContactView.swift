@@ -10,6 +10,8 @@ struct EditContactView: View {
     @ObservedObject var contactStorage = ContactStorageController.shared
     @State private var showingUpdateAlert = false
     @State private var updateAlertMessage = ""
+    @State private var showingUnpairConfirmation = false
+    
     
     var body: some View {
         Form {
@@ -24,8 +26,19 @@ struct EditContactView: View {
             
             Section {
                 Button("Unpair NFC tag") {
-                    // Your unpair logic here
+                    self.showingUnpairConfirmation = true
                 }
+                .alert(isPresented: $showingUnpairConfirmation) {
+                    Alert(
+                        title: Text("Unpair NFC Tag"),
+                        message: Text("Are you sure you want to unpair this NFC tag?"),
+                        primaryButton: .destructive(Text("Unpair")) {
+                            unpairNfcTag()
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
+                
             }
         }
         .navigationBarTitle("Edit Contact", displayMode: .inline)
@@ -60,6 +73,11 @@ struct EditContactView: View {
                 print("Error fetching contact details: \(error)")
             }
         }
+    }
+    
+    private func unpairNfcTag() {
+        contactStorage.delete(contact: contact)
+        presentationMode.wrappedValue.dismiss()
     }
     
     private func saveContactChanges() {

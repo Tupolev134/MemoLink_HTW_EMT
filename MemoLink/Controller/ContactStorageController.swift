@@ -11,6 +11,15 @@ class ContactStorageController: ObservableObject {
         load()
     }
     
+    private func save() {
+        do {
+            let data = try JSONEncoder().encode(contacts)
+            try data.write(to: fileURL)
+        } catch {
+            print("Error saving contacts: \(error)")
+        }
+    }
+    
     func save(newContact: Contact) {
         contacts.append(newContact)
         do {
@@ -24,7 +33,7 @@ class ContactStorageController: ObservableObject {
     func load() {
         guard FileManager.default.fileExists(atPath: fileURL.path) else {
             print("contacts.json file does not exist yet.")
-            contacts = [] 
+            contacts = []
             return
         }
         
@@ -39,6 +48,6 @@ class ContactStorageController: ObservableObject {
     
     func delete(contact: Contact) {
         contacts.removeAll { $0.id == contact.id }
-//        save()
+        save()
     }
 }

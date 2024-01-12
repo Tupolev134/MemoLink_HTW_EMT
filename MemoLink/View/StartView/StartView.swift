@@ -2,7 +2,7 @@ import SwiftUI
 
 struct StartView: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Image(systemName: "shareplay")
                     .resizable() // Ermöglicht die Anpassung der Größe des Symbols
@@ -16,11 +16,22 @@ struct StartView: View {
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .padding()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("BG").edgesIgnoringSafeArea(.all))
-            .navigationBarItems(trailing: NavigationLink(destination: SettingsView()) {
-                Image(systemName: "gear")
-            })
+            
+            
+            
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing){
+                    NavigationLink{
+                        SettingsView()
+                    } label: {
+                        Image(systemName: "gear")
+                    }
+                    
+                }
+            }
+            .navigationTitle("MemoLink")
+            .toolbarBackground(Color.white, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
         }
     }
 }

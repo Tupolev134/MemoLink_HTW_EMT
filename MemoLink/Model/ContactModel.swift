@@ -1,18 +1,14 @@
+import Contacts
 import Foundation
 
-struct Contact: Identifiable {
-    var id: String        // eventuell NFC-Tag-ID
-    var name: String
-    var phoneNumber: String?
-    var birthday: Date?
-    var nfcTagIdentifier: String?
+struct Contact: Identifiable, Codable {
+    var id: UUID
+    var contactIdentifier: String
+    var nfcTagID: String?
 
-    init(id: String, name: String, phoneNumber: String? = nil, email: String? = nil, birthday: Date? = nil, nfcTagIdentifier: String? = nil) {
-        self.id = id
-        self.name = name
-        self.phoneNumber = phoneNumber
-        self.birthday = birthday
-        self.nfcTagIdentifier = nfcTagIdentifier
+    init(contactIdentifier: String, nfcTagID: String? = nil) {
+        self.id = UUID()
+        self.contactIdentifier = contactIdentifier
+        self.nfcTagID = nfcTagID
     }
-
 }

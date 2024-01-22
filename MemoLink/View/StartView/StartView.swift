@@ -2,7 +2,11 @@ import SwiftUI
 
 struct StartView: View {
     @ObservedObject var contactStorage = ContactStorageController.shared
-
+    @State private var showingAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    @StateObject private var nfcManager = NFCReadManager()
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -32,8 +36,17 @@ struct StartView: View {
                     }
                     
                 }
+            }.onAppear {
+                nfcManager.onAlert = { title, message in
+                    self.alertTitle = title
+                    self.alertMessage = message
+                    self.showingAlert = true
+                }
+                nfcManager.beginScanning()
             }
-            
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            }
         }
     }
 }

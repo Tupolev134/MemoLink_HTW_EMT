@@ -11,6 +11,8 @@
 		57917B6D2B41877B00977119 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57917B6C2B41877B00977119 /* StartView.swift */; };
 		57917B6F2B41877C00977119 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57917B6E2B41877C00977119 /* Assets.xcassets */; };
 		57917B722B41877C00977119 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57917B712B41877C00977119 /* Preview Assets.xcassets */; };
+		57BAA5182B5ECAD0000C5BE0 /* NFCWriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BAA5172B5ECAD0000C5BE0 /* NFCWriteManager.swift */; };
+		57BAA51A2B5ECB07000C5BE0 /* NFCReadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BAA5192B5ECB07000C5BE0 /* NFCReadManager.swift */; };
 		E10F14A72B517B4800E8EA97 /* EditContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F14A62B517B4800E8EA97 /* EditContactView.swift */; };
 		E113CDFF2B4FEBF400EA3A87 /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CDFE2B4FEBF400EA3A87 /* ContactDetailView.swift */; };
 		E113CE012B4FED0400EA3A87 /* AddNfcTagToContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CE002B4FED0400EA3A87 /* AddNfcTagToContactView.swift */; };
@@ -31,6 +33,9 @@
 		57917B6C2B41877B00977119 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		57917B6E2B41877C00977119 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57917B712B41877C00977119 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		57BAA5102B5E9E55000C5BE0 /* MemoLink.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MemoLink.entitlements; sourceTree = "<group>"; };
+		57BAA5172B5ECAD0000C5BE0 /* NFCWriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCWriteManager.swift; sourceTree = "<group>"; };
+		57BAA5192B5ECB07000C5BE0 /* NFCReadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCReadManager.swift; sourceTree = "<group>"; };
 		E10F14A62B517B4800E8EA97 /* EditContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactView.swift; sourceTree = "<group>"; };
 		E113CDFE2B4FEBF400EA3A87 /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailView.swift; sourceTree = "<group>"; };
 		E113CE002B4FED0400EA3A87 /* AddNfcTagToContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNfcTagToContactView.swift; sourceTree = "<group>"; };
@@ -75,6 +80,7 @@
 		57917B692B41877B00977119 /* MemoLink */ = {
 			isa = PBXGroup;
 			children = (
+				57BAA5102B5E9E55000C5BE0 /* MemoLink.entitlements */,
 				E113CE042B500BFD00EA3A87 /* Storage */,
 				E15051F32B44A3680064B593 /* Controller */,
 				E15051F22B44A34D0064B593 /* ViewModel */,
@@ -135,6 +141,8 @@
 			children = (
 				E113CE052B500C1900EA3A87 /* ContactStorageController.swift */,
 				E113CE092B5010AE00EA3A87 /* CNContactsController.swift */,
+				57BAA5172B5ECAD0000C5BE0 /* NFCWriteManager.swift */,
+				57BAA5192B5ECB07000C5BE0 /* NFCReadManager.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -257,6 +265,7 @@
 				57917B6D2B41877B00977119 /* StartView.swift in Sources */,
 				E113CE0A2B5010AE00EA3A87 /* CNContactsController.swift in Sources */,
 				E15051FE2B44AD590064B593 /* LargeButton.swift in Sources */,
+				57BAA51A2B5ECB07000C5BE0 /* NFCReadManager.swift in Sources */,
 				E1A5DD9B2B4EF05E00B53078 /* LargeNavButton.swift in Sources */,
 				E15051FC2B44A64E0064B593 /* SettingsView.swift in Sources */,
 				E113CE012B4FED0400EA3A87 /* AddNfcTagToContactView.swift in Sources */,
@@ -267,6 +276,7 @@
 				57917B6B2B41877B00977119 /* MemoLinkApp.swift in Sources */,
 				E15051F92B44A4D80064B593 /* ContactModel.swift in Sources */,
 				E113CE062B500C1900EA3A87 /* ContactStorageController.swift in Sources */,
+				57BAA5182B5ECAD0000C5BE0 /* NFCWriteManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,13 +406,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MemoLink/MemoLink.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MemoLink/Preview Content\"";
-				DEVELOPMENT_TEAM = JZLT94DZPK;
+				DEVELOPMENT_TEAM = R4PB4GGHPK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NFCReaderUsageDescription = "Privacy - NFC Scan Usage Description ";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Allow contact access";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -415,6 +427,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = de.cadw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -428,13 +441,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MemoLink/MemoLink.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MemoLink/Preview Content\"";
-				DEVELOPMENT_TEAM = JZLT94DZPK;
+				DEVELOPMENT_TEAM = R4PB4GGHPK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NFCReaderUsageDescription = "Privacy - NFC Scan Usage Description ";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Allow contact access";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -447,6 +462,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = de.cadw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

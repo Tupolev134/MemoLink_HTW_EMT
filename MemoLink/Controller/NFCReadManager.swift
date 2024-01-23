@@ -9,7 +9,9 @@ import CoreNFC
 
 /// - Tag: MessagesTableViewController
 class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
+
     @Published var detectedMessages = [NFCNDEFMessage]()
+    @Published var lastScannedTagId: String?
     var session: NFCNDEFReaderSession?
     var onAlert: ((String, String) -> Void)?
 
@@ -23,13 +25,18 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
         session?.alertMessage = "Hold your iPhone near the item to learn more about it."
         session?.begin()
     }
-
+    
     func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
-           DispatchQueue.main.async {
-               // Process detected NFCNDEFMessage objects.
-               self.detectedMessages.append(contentsOf: messages)
-           }
-       }
+        DispatchQueue.main.async {
+            // Assuming the tag's unique identifier is stored as plain text in the NFC payload
+            for payload in messages.first?.records ?? [] {
+                if let text = String(data: payload.payload, encoding: .utf8) {
+                    self.lastScannedTagId = text
+                    break
+                }
+            }
+        }
+    }
 
     func readerSession(_ session: NFCNDEFReaderSession, didDetect tags: [NFCNDEFTag]) {
         if tags.count > 1 {
@@ -68,21 +75,12 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
                         statusMessage = "Fail to read NDEF from tag: \(error.localizedDescription)"
                     } else if let message = message {
                         statusMessage = "Found \(message.records.count) NDEF message(s)"
-                        DispatchQueue.main.async {
-                            // Process detected NFCNDEFMessage objects.
-                            self.detectedMessages.append(message)
-                            
-                            // Loop through all records in the message
-                            for record in message.records {
-                                // Check if the payload's TNF (Type Name Format) indicates it's a well-known type
-                                if record.typeNameFormat == .nfcWellKnown {
-                                    // Attempt to decode the text string from the payload
-                                    if let text = String(data: record.payload, encoding: .utf8) {
-                                        print("NFC Text: \(text)")
+                            for payload in message.records {
+                                if let text = self.extractText(from: payload) {
+                                    self.lastScannedTagId = text
+                                    print(self.lastScannedTagId)
                                     }
                                 }
-                            }
-                        }
                     } else {
                         statusMessage = "No NDEF message found."
                     }
@@ -117,5 +115,25 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
         
         // To read new tags, a new session instance is required.
         self.session = nil
+    }
+    
+    func extractText(from payload: NFCNDEFPayload) -> String? {
+        guard payload.typeNameFormat == .nfcWellKnown else {
+            print("not Well Known")
+            return nil
+        }
+
+        let data = payload.payload
+        print(data.base64EncodedString())
+        // The first byte of the payload is the status byte (which includes the length of the language code)
+        let statusByte = data.first ?? 0
+        let langCodeLength = Int(statusByte & 0x3F) // lower 6 bits of the status byte
+        let textDataRange = (1 + langCodeLength)..<data.count
+        
+        print(textDataRange)
+        
+        print(String(data: data[textDataRange], encoding: .utf8))
+
+        return String(data: data[textDataRange], encoding: .utf8)
     }
 }

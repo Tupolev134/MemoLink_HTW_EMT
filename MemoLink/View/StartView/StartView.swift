@@ -6,6 +6,7 @@ struct StartView: View {
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     @StateObject private var nfcManager = NFCReadManager()
+    @State private var navigateToContactView = false
     
     var body: some View {
         NavigationStack {
@@ -47,9 +48,21 @@ struct StartView: View {
             .alert(isPresented: $showingAlert) {
                 Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
+            NavigationLink(destination: ContactView(contact: contactStorage.getContact(byNfcTagId: nfcManager.lastScannedTagId ?? "") ?? Contact.defaultContact), isActive: $navigateToContactView) {
+                            EmptyView()
+                        }
+                    }
+                    .onChange(of: nfcManager.lastScannedTagId) { _ in
+                        print(nfcManager.lastScannedTagId)
+                        if nfcManager.lastScannedTagId != nil {
+                            navigateToContactView = true
+                        }
+                    }
+                }
+            
         }
-    }
-}
+
+
 
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {

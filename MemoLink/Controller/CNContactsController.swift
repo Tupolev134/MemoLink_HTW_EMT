@@ -102,14 +102,13 @@ class CNContactsController {
         newContact.givenName = firstName
         newContact.familyName = lastName
         
-        // Telefonnummer hinzufügen
+        
         if !phoneNumber.isEmpty {
             let phoneValue = CNPhoneNumber(stringValue: phoneNumber)
             let phoneLabel = CNLabeledValue(label: CNLabelPhoneNumberMobile, value: phoneValue)
             newContact.phoneNumbers.append(phoneLabel)
         }
         
-        // Geburtsdatum hinzufügen, falls vorhanden
         if let birthdayDate = birthday {
             let calendar = Calendar.current
             let dateComponents = calendar.dateComponents([.day, .month, .year], from: birthdayDate)

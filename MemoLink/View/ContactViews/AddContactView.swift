@@ -52,15 +52,6 @@ struct AddContactView: View {
     }
     
     private func saveNewContact() {
-                let newContact = CNMutableContact()
-                newContact.givenName = firstName
-                newContact.familyName = lastName
-                newContact.phoneNumbers = [CNLabeledValue(label: CNLabelPhoneNumberMobile, value: CNPhoneNumber(stringValue: phoneNumber))]
-        
-                let birthdayComponents = Calendar.current.dateComponents([.day, .month, .year], from: birthday)
-                newContact.birthday = birthdayComponents
-        
-                // Speichern in CNContacts
                 
     }
     

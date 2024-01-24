@@ -27,11 +27,11 @@ struct AddContactView: View {
                     .datePickerStyle(WheelDatePickerStyle())
             }
             
-//            Section {
-//                Button("Save Contact") {
-//                    saveNewContact()
-//                }
-//            }
+            //            Section {
+            //                Button("Save Contact") {
+            //                    saveNewContact()
+            //                }
+            //            }
         }
         .navigationBarTitle("New Contact", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
@@ -52,7 +52,18 @@ struct AddContactView: View {
     }
     
     private func saveNewContact() {
-                
+        CNContactsController.shared.addNewContact(firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, birthday: birthday) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success():
+                    self.saveAlertMessage = "Contact successfully saved."
+                    self.showingSaveAlert = true
+                case .failure(let error):
+                    self.saveAlertMessage = "Failed to save contact: \(error.localizedDescription)"
+                    self.showingSaveAlert = true
+                }
+            }
+        }
     }
     
 }

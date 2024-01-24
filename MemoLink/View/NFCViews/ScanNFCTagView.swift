@@ -7,51 +7,63 @@ struct ScanNFCTagView: View {
     @State private var showAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
+    @State private var shouldAutoDismiss = false
     @StateObject private var nfcManager = NFCWriteManager()
     
     var body: some View {
-        Button("Start NFC Session") {
-            startNfcSession()
+        VStack {
+            Text("Scanning NFC Tag...")
+                .font(.title)
+                .padding()
         }
         .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text("Success"),
-                message: Text("Contact successfully saved"),
-                dismissButton: .default(Text("Okay")) {
-                    presentationMode.wrappedValue.dismiss()
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: nil)
+        }
+        .onAppear {
+            self.startNfcSession()
+        }
+        .onChange(of: shouldAutoDismiss) { autoDismiss in
+            if autoDismiss {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // 2 seconds delay
+                    self.presentationMode.wrappedValue.dismiss()
                 }
-            )
+            }
         }
     }
     
     func startNfcSession() {
         let uuidString = UUID().uuidString
-        print("Generated UUID: \(uuidString)")
-
-        if let payload = NFCNDEFPayload.wellKnownTypeTextPayload(string: uuidString, locale: Locale(identifier: "en")) {
-            print("NFC Payload created successfully.")
+        let customURL = "memolink://contact_id/\(uuidString)"
+        
+        if let payload = NFCNDEFPayload.wellKnownTypeURIPayload(string: customURL) {
             nfcManager.message = NFCNDEFMessage(records: [payload])
-
-            nfcManager.beginWrite{ (success: Bool, error: Error?) in
+            
+            nfcManager.beginWrite { (success: Bool, error: Error?) in
                 DispatchQueue.main.async {
                     if success {
-                        // Save contact if NFC write was successful
                         self.saveContact(with: uuidString)
+                        self.alertTitle = "Success"
                         self.alertMessage = "NFC Write Successful and Contact Saved"
+                        self.shouldAutoDismiss = true
                     } else {
-                        // Handle the error scenario, maybe update the UI to show an error message
-                        self.alertMessage = "NFC Write Failed: \(error?.localizedDescription ?? "Unknown error")"
+                        self.alertTitle = "Error"
+                        self.alertMessage = error?.localizedDescription ?? "Unknown error"
+                        self.showRetryAlert()
                     }
                     self.showAlert = true
                 }
             }
-        } else {
-            print("Failed to create NFC payload.")
-            self.alertTitle = "Error"
-            self.alertMessage = "Failed to create NFC payload."
+        }
+    }
+
+    private func showRetryAlert() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // 5 seconds delay for retry option
+            self.alertTitle = "Retry?"
+            self.alertMessage = "Tap to retry NFC scanning."
             self.showAlert = true
         }
     }
+    
 
     func saveContact(with uuidString: String) {
         let newContact = Contact(contactIdentifier: contactIdentifier, nfcTagID: uuidString)

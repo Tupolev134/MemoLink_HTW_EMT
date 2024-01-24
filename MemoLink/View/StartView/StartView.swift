@@ -24,9 +24,6 @@ struct StartView: View {
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .padding()
                 Spacer()
-                NavigationLink(destination: ContactView(contact: contactStorage.getContact(byNfcTagId: "dummy-nfc-tag-id") ?? Contact.defaultContact)) {
-                            Text("Scan")
-                        }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
@@ -48,13 +45,13 @@ struct StartView: View {
             .alert(isPresented: $showingAlert) {
                 Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
-            NavigationLink(destination: ContactView(contact: contactStorage.getContact(byNfcTagId: nfcManager.lastScannedTagId ?? "") ?? Contact.defaultContact), isActive: $navigateToContactView) {
+            NavigationLink(destination: ContactView(contact: contactStorage.getContact(byNfcTagId: nfcManager.lastScannedContactID ?? "") ?? Contact.defaultContact), isActive: $navigateToContactView) {
                             EmptyView()
                         }
                     }
-                    .onChange(of: nfcManager.lastScannedTagId) { _ in
-                        print(nfcManager.lastScannedTagId)
-                        if nfcManager.lastScannedTagId != nil {
+                    .onChange(of: nfcManager.lastScannedContactID) { _ in
+                        print(nfcManager.lastScannedContactID)
+                        if nfcManager.lastScannedContactID != nil {
                             navigateToContactView = true
                         }
                     }

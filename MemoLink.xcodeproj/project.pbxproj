@@ -28,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		572351DF2B612CB50059A215 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		57917B672B41877B00977119 /* MemoLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57917B6A2B41877B00977119 /* MemoLinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoLinkApp.swift; sourceTree = "<group>"; };
 		57917B6C2B41877B00977119 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
@@ -80,6 +81,7 @@
 		57917B692B41877B00977119 /* MemoLink */ = {
 			isa = PBXGroup;
 			children = (
+				572351DF2B612CB50059A215 /* Info.plist */,
 				57BAA5102B5E9E55000C5BE0 /* MemoLink.entitlements */,
 				E113CE042B500BFD00EA3A87 /* Storage */,
 				E15051F32B44A3680064B593 /* Controller */,
@@ -414,6 +416,7 @@
 				DEVELOPMENT_TEAM = R4PB4GGHPK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MemoLink/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "Privacy - NFC Scan Usage Description ";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Allow contact access";
@@ -451,6 +454,7 @@
 				DEVELOPMENT_TEAM = R4PB4GGHPK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MemoLink/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "Privacy - NFC Scan Usage Description ";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Allow contact access";

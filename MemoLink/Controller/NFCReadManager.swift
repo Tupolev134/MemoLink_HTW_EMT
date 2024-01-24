@@ -11,7 +11,7 @@ import CoreNFC
 class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
 
     @Published var detectedMessages = [NFCNDEFMessage]()
-    @Published var lastScannedTagId: String?
+    @Published var lastScannedContactID: String?
     var session: NFCNDEFReaderSession?
     var onAlert: ((String, String) -> Void)?
 
@@ -28,14 +28,31 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
     
     func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
         DispatchQueue.main.async {
-            // Assuming the tag's unique identifier is stored as plain text in the NFC payload
             for payload in messages.first?.records ?? [] {
-                if let text = String(data: payload.payload, encoding: .utf8) {
-                    self.lastScannedTagId = text
+                if let uri = self.extractURI(from: payload) {
+                    self.lastScannedContactID = self.extractContactID(from: uri)
                     break
                 }
             }
         }
+    }
+
+    func extractURI(from payload: NFCNDEFPayload) -> String? {
+        guard payload.typeNameFormat == .nfcWellKnown,
+              let type = String(data: payload.type, encoding: .ascii),
+              type == "U" else {
+            return nil
+        }
+
+        // URI payloads typically skip the first byte (status byte)
+        return String(data: payload.payload.advanced(by: 1), encoding: .utf8)
+    }
+
+    func extractContactID(from uri: String) -> String? {
+        // Extract and return the contact ID part from the URI
+        // Assuming the URI is in the format "memolink://contact_id/{contactID}"
+        let components = uri.components(separatedBy: "/")
+        return components.last
     }
 
     func readerSession(_ session: NFCNDEFReaderSession, didDetect tags: [NFCNDEFTag]) {
@@ -76,11 +93,11 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
                     } else if let message = message {
                         statusMessage = "Found \(message.records.count) NDEF message(s)"
                             for payload in message.records {
-                                if let text = self.extractText(from: payload) {
-                                    self.lastScannedTagId = text
-                                    print(self.lastScannedTagId)
-                                    }
+                                if let uri = self.extractURI(from: payload) {
+                                    self.lastScannedContactID = self.extractContactID(from: uri)
+                                    break
                                 }
+                            }
                     } else {
                         statusMessage = "No NDEF message found."
                     }

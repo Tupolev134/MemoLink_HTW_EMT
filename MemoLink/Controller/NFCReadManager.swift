@@ -9,9 +9,6 @@ import CoreNFC
 
 /// - Tag: MessagesTableViewController
 class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
-
-    @Published var detectedMessages = [NFCNDEFMessage]()
-    @Published var lastScannedContactID: String?
     var session: NFCNDEFReaderSession?
     var onAlert: ((String, String) -> Void)?
 
@@ -29,9 +26,9 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
     func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
         DispatchQueue.main.async {
             for payload in messages.first?.records ?? [] {
-                if let uri = self.extractURI(from: payload) {
-                    self.lastScannedContactID = self.extractContactID(from: uri)
-                    break
+                if let uri = self.extractURI(from: payload),
+                   let contactID = self.extractContactID(from: uri) {
+                    NFCDataHandler.shared.handleScannedUUID(contactID)
                 }
             }
         }
@@ -44,13 +41,11 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
             return nil
         }
 
-        // URI payloads typically skip the first byte (status byte)
         return String(data: payload.payload.advanced(by: 1), encoding: .utf8)
     }
 
     func extractContactID(from uri: String) -> String? {
         // Extract and return the contact ID part from the URI
-        // Assuming the URI is in the format "memolink://contact_id/{contactID}"
         let components = uri.components(separatedBy: "/")
         return components.last
     }
@@ -92,12 +87,14 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
                         statusMessage = "Fail to read NDEF from tag: \(error.localizedDescription)"
                     } else if let message = message {
                         statusMessage = "Found \(message.records.count) NDEF message(s)"
+                        DispatchQueue.main.async {
                             for payload in message.records {
-                                if let uri = self.extractURI(from: payload) {
-                                    self.lastScannedContactID = self.extractContactID(from: uri)
-                                    break
+                                if let uri = self.extractURI(from: payload),
+                                   let contactID = self.extractContactID(from: uri) {
+                                    NFCDataHandler.shared.handleScannedUUID(contactID)
                                 }
                             }
+                        }
                     } else {
                         statusMessage = "No NDEF message found."
                     }
@@ -116,12 +113,7 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
     
     /// - Tag: endScanning
     func readerSession(_ session: NFCNDEFReaderSession, didInvalidateWithError error: Error) {
-        // Check the invalidation reason from the returned error.
         if let readerError = error as? NFCReaderError {
-            // Show an alert when the invalidation reason is not because of a
-            // successful read during a single-tag read session, or because the
-            // user canceled a multiple-tag read session from the UI or
-            // programmatically using the invalidate method call.
             if (readerError.code != .readerSessionInvalidationErrorFirstNDEFTagRead)
                 && (readerError.code != .readerSessionInvalidationErrorUserCanceled) {
                 DispatchQueue.main.async {
@@ -130,27 +122,7 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
             }
         }
         
-        // To read new tags, a new session instance is required.
         self.session = nil
     }
     
-    func extractText(from payload: NFCNDEFPayload) -> String? {
-        guard payload.typeNameFormat == .nfcWellKnown else {
-            print("not Well Known")
-            return nil
-        }
-
-        let data = payload.payload
-        print(data.base64EncodedString())
-        // The first byte of the payload is the status byte (which includes the length of the language code)
-        let statusByte = data.first ?? 0
-        let langCodeLength = Int(statusByte & 0x3F) // lower 6 bits of the status byte
-        let textDataRange = (1 + langCodeLength)..<data.count
-        
-        print(textDataRange)
-        
-        print(String(data: data[textDataRange], encoding: .utf8))
-
-        return String(data: data[textDataRange], encoding: .utf8)
-    }
 }

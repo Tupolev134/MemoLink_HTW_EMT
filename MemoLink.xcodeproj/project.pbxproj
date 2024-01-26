@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		570452B42B64149F00C84E8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570452B32B64149F00C84E8E /* AppDelegate.swift */; };
 		57917B6B2B41877B00977119 /* MemoLinkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57917B6A2B41877B00977119 /* MemoLinkApp.swift */; };
 		57917B6D2B41877B00977119 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57917B6C2B41877B00977119 /* StartView.swift */; };
 		57917B6F2B41877C00977119 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57917B6E2B41877C00977119 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		570452B32B64149F00C84E8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		572351DF2B612CB50059A215 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		57917B672B41877B00977119 /* MemoLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57917B6A2B41877B00977119 /* MemoLinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoLinkApp.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				57917B6A2B41877B00977119 /* MemoLinkApp.swift */,
 				57917B6E2B41877C00977119 /* Assets.xcassets */,
 				57917B702B41877C00977119 /* Preview Content */,
+				570452B32B64149F00C84E8E /* AppDelegate.swift */,
 			);
 			path = MemoLink;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				E15051FC2B44A64E0064B593 /* SettingsView.swift in Sources */,
 				E113CE012B4FED0400EA3A87 /* AddNfcTagToContactView.swift in Sources */,
 				E10F14A72B517B4800E8EA97 /* EditContactView.swift in Sources */,
+				570452B42B64149F00C84E8E /* AppDelegate.swift in Sources */,
 				E113CDFF2B4FEBF400EA3A87 /* ContactDetailView.swift in Sources */,
 				E113CE032B5007D800EA3A87 /* ScanNFCTagView.swift in Sources */,
 				E15052002B44B1EF0064B593 /* ContactView.swift in Sources */,

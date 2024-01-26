@@ -2,10 +2,12 @@ import SwiftUI
 
 struct StartView: View {
     @ObservedObject var contactStorage = ContactStorageController.shared
+    // state for background read nfc tags
+    @ObservedObject private var nfcDataHandler = NFCDataHandler.shared
+    @StateObject private var nfcReadManager = NFCReadManager()
     @State private var showingAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
-    @StateObject private var nfcManager = NFCReadManager()
     @State private var navigateToContactView = false
     
     var body: some View {
@@ -17,11 +19,11 @@ struct StartView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 60, height: 60)
                     .foregroundColor(.accentColor)
-                Text("Hold your phone near a image of a person")
+                Text("Hold your phone near a NFC tag")
                     .multilineTextAlignment(.center)
                     .font(.largeTitle)
                     .frame(alignment: .center)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .padding()
                 Spacer()
             }
@@ -32,34 +34,50 @@ struct StartView: View {
                     } label: {
                         Image(systemName: "gear")
                     }
-                    
                 }
-            }.onAppear {
-                nfcManager.onAlert = { title, message in
-                    self.alertTitle = title
-                    self.alertMessage = message
-                    self.showingAlert = true
+            }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    if nfcDataHandler.lastScannedUUID != nil {
+                        navigateToContactView = true
+                    } else {
+                        startScanning()
+                    }
                 }
-                nfcManager.beginScanning()
+            }
+            .onChange(of: nfcDataHandler.lastScannedUUID) { _ in
+                if nfcDataHandler.lastScannedUUID != nil {
+                    navigateToContactView = true
+                }
             }
             .alert(isPresented: $showingAlert) {
-                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                Alert(
+                    title: Text(alertTitle),
+                    message: Text(alertMessage),
+                    primaryButton: .default(Text("Retry")) {
+                        startScanning()
+                    },
+                    secondaryButton: .cancel()
+                )
             }
-            NavigationLink(destination: ContactView(contact: contactStorage.getContact(byNfcTagId: nfcManager.lastScannedContactID ?? "") ?? Contact.defaultContact), isActive: $navigateToContactView) {
-                            EmptyView()
-                        }
-                    }
-                    .onChange(of: nfcManager.lastScannedContactID) { _ in
-                        print(nfcManager.lastScannedContactID)
-                        if nfcManager.lastScannedContactID != nil {
-                            navigateToContactView = true
-                        }
-                    }
-                }
-            
+            NavigationLink(
+                destination: ContactView(contact: contactStorage.getContact(byNfcTagId: nfcDataHandler.lastScannedUUID ?? "") ?? Contact.defaultContact),
+                isActive: $navigateToContactView
+            ) {
+                EmptyView()
+            }
         }
-
-
+    }
+    
+    private func startScanning() {
+        nfcReadManager.onAlert = { title, message in
+            self.alertTitle = title
+            self.alertMessage = message
+            self.showingAlert = true
+        }
+        nfcReadManager.beginScanning()
+    }
+}
 
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {

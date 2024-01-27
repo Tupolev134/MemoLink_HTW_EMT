@@ -14,17 +14,12 @@ struct StartView: View {
         NavigationStack {
             VStack {
                 Spacer()
-                Image(systemName: "shareplay")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 60, height: 60)
-                    .foregroundColor(.accentColor)
-                Text("Hold your phone near a NFC tag")
-                    .multilineTextAlignment(.center)
-                    .font(.largeTitle)
-                    .frame(alignment: .center)
-                    .fontWeight(.bold)
-                    .padding()
+                Image(systemName: "arrow.down.app.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 200, height: 200)
+                                    .foregroundColor(.accentColor)
+                                    .padding(.bottom, 300)
                 Spacer()
             }
             .toolbar {

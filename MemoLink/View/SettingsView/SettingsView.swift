@@ -14,7 +14,7 @@ struct SettingsView: View {
                 NavigationLink(destination: RemoveNfcTagView()) {
                     Text("Clear NFC tag")
                 }
-                NavigationLink(destination: RemoveNfcTagView()) {
+                NavigationLink(destination: AddContactView(contactStorage: contactStorage)) {
                     Text("Add new contact")
                 }
             }

@@ -28,6 +28,8 @@ struct EditContactView: View {
             Section(header: Text("Birthday")) {
                 DatePicker("Birthday", selection: $birthday, displayedComponents: .date)
                     .datePickerStyle(WheelDatePickerStyle())
+                    .labelsHidden()
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
             }
             
             Section {

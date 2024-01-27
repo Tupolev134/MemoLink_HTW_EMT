@@ -67,6 +67,8 @@ struct AddContactView: View {
                 }
             }
         }
+        
+        //TODO: open ScanNewNFCTagView
     }
     
 }

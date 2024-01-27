@@ -12,7 +12,6 @@
 		57917B6F2B41877C00977119 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57917B6E2B41877C00977119 /* Assets.xcassets */; };
 		57917B722B41877C00977119 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57917B712B41877C00977119 /* Preview Assets.xcassets */; };
 		E10F14A72B517B4800E8EA97 /* EditContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F14A62B517B4800E8EA97 /* EditContactView.swift */; };
-		E113CDFF2B4FEBF400EA3A87 /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CDFE2B4FEBF400EA3A87 /* ContactDetailView.swift */; };
 		E113CE012B4FED0400EA3A87 /* AddNfcTagToContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CE002B4FED0400EA3A87 /* AddNfcTagToContactView.swift */; };
 		E113CE032B5007D800EA3A87 /* ScanNFCTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CE022B5007D800EA3A87 /* ScanNFCTagView.swift */; };
 		E113CE062B500C1900EA3A87 /* ContactStorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113CE052B500C1900EA3A87 /* ContactStorageController.swift */; };
@@ -33,7 +32,6 @@
 		57917B6E2B41877C00977119 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57917B712B41877C00977119 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E10F14A62B517B4800E8EA97 /* EditContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactView.swift; sourceTree = "<group>"; };
-		E113CDFE2B4FEBF400EA3A87 /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailView.swift; sourceTree = "<group>"; };
 		E113CE002B4FED0400EA3A87 /* AddNfcTagToContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNfcTagToContactView.swift; sourceTree = "<group>"; };
 		E113CE022B5007D800EA3A87 /* ScanNFCTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNFCTagView.swift; sourceTree = "<group>"; };
 		E113CE052B500C1900EA3A87 /* ContactStorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStorageController.swift; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				E15051FF2B44B1EF0064B593 /* ContactView.swift */,
-				E113CDFE2B4FEBF400EA3A87 /* ContactDetailView.swift */,
 				E10F14A62B517B4800E8EA97 /* EditContactView.swift */,
 				E19067132B6029B7004E0132 /* AddContactView.swift */,
 			);
@@ -264,7 +261,6 @@
 				E15051FC2B44A64E0064B593 /* SettingsView.swift in Sources */,
 				E113CE012B4FED0400EA3A87 /* AddNfcTagToContactView.swift in Sources */,
 				E10F14A72B517B4800E8EA97 /* EditContactView.swift in Sources */,
-				E113CDFF2B4FEBF400EA3A87 /* ContactDetailView.swift in Sources */,
 				E113CE032B5007D800EA3A87 /* ScanNFCTagView.swift in Sources */,
 				E15052002B44B1EF0064B593 /* ContactView.swift in Sources */,
 				E19067142B6029B8004E0132 /* AddContactView.swift in Sources */,

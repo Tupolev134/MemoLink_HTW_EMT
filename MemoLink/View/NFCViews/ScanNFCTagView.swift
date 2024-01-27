@@ -25,5 +25,7 @@ struct ScanNFCTagView: View {
         let newContact = Contact(contactIdentifier: contactIdentifier, nfcTagID: dummyNfcTagID)
         ContactStorageController.shared.save(newContact: newContact)
         showAlert = true
+        
+        //TODO: scan NFC Tag and add to Contacts-JSON
     }
 }

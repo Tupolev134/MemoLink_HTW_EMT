@@ -96,6 +96,7 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
                             }
                         }
                     } else {
+                        //TODO redirect to add contact view
                         statusMessage = "No NDEF message found."
                     }
                     

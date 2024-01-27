@@ -23,10 +23,10 @@ struct ContactView: View {
                 textContact()
             }
             Spacer()
-            LargeButton(text: "Show chat") {
-                showChat()
-            }
-            Spacer()
+//            LargeButton(text: "Show chat") {
+//                showChat()
+//            }
+//            Spacer()
         }
         .onAppear{loadContactDetails()}
         .navigationTitle(firstName + " " + lastName)

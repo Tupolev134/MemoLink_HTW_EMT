@@ -10,9 +10,9 @@ struct LargeButton: View {
                 .font(.system(size: 32))
                 .bold()
                 .frame(maxWidth: .infinity)
-                .frame(height: 150)
+                .frame(height: 300)
                 .foregroundColor(Color("BG"))
-                .background(Color.black)
+                .background(Color.accentColor)
                 .cornerRadius(10)
         }
         .padding()

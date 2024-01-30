@@ -71,7 +71,10 @@ struct StartView: View {
                 )
             }
             NavigationLink(
-                destination: ContactView(contact: contactStorage.getContact(byNfcTagId: nfcDataHandler.lastScannedUUID ?? "") ?? Contact.defaultContact),
+                destination: ContactView(contact: contactStorage.getContact(byNfcTagId: nfcDataHandler.lastScannedUUID ?? "") ?? Contact.defaultContact)
+                    .onDisappear {
+                        nfcDataHandler.lastScannedUUID = nil
+                    },
                 isActive: $navigateToContactView
             ) {
                 EmptyView()

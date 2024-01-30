@@ -9,6 +9,11 @@ struct ContactView: View {
     @State private var birthday: String = ""
     @ObservedObject var contactStorage = ContactStorageController.shared
     
+    @State private var callCount = 0
+    @State private var cooldownEnds: Date? = nil
+    let callLimit = 3
+    let cooldownDuration = 3600 // 1 hour in seconds
+    
     var body: some View {
         VStack(alignment: .leading){
             Text("*\(birthday)")
@@ -51,13 +56,24 @@ struct ContactView: View {
         }
     }
     
-    func makePhoneCall(phoneNumber: String) {
-        guard let url = URL(string: "tel://\(phoneNumber)"),
-              UIApplication.shared.canOpenURL(url) else {
-            return
+
+    private func makePhoneCall(phoneNumber: String) {
+        if callCount < callLimit {
+            if let url = URL(string: "tel://\(phoneNumber)"),
+               UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+                callCount += 1
+                if callCount == callLimit {
+                    cooldownEnds = Date().addingTimeInterval(Double(cooldownDuration))
+                }
+            }
+        } else if let cooldownEnds = cooldownEnds, Date() > cooldownEnds {
+            callCount = 0
+            self.cooldownEnds = nil // Resetting cooldownEnds to nil
+            makePhoneCall(phoneNumber: phoneNumber)
+        } else {
+            // Handle the cooldown (e.g., show an alert or disable the call button)
         }
-        
-        UIApplication.shared.open(url)
     }
     
     func showChat() {

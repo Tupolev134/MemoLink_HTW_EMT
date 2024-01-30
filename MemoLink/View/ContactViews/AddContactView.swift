@@ -10,6 +10,7 @@ struct AddContactView: View {
     @State private var birthday: Date = Date()
     @State private var showingSaveAlert = false
     @State private var saveAlertMessage: String = ""
+    var onEmptyTagDetected: (() -> Void)?
     
     var body: some View {
         Form {

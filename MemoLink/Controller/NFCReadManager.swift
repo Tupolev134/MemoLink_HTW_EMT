@@ -11,6 +11,7 @@ import CoreNFC
 class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
     var session: NFCNDEFReaderSession?
     var onAlert: ((String, String) -> Void)?
+    var onEmptyTagDetected: (() -> Void)?
 
     func beginScanning() {
         guard NFCNDEFReaderSession.readingAvailable else {
@@ -84,7 +85,16 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
                 tag.readNDEF(completionHandler: { (message: NFCNDEFMessage?, error: Error?) in
                     var statusMessage: String
                     if let error = error {
-                        statusMessage = "Fail to read NDEF from tag: \(error.localizedDescription)"
+                        if error.localizedDescription == "NDEF tag does not contain any NDEF message" {
+                            // Error due to no NDEF message found
+                            statusMessage = "NDEF Tag does not contain any NDEF message. Choose a contact to associate it with"
+                            DispatchQueue.main.async {
+                                self.onEmptyTagDetected?()
+                            }
+                        } else {
+                            // Other errors
+                            statusMessage = "Fail to read NDEF from tag: \(error.localizedDescription)"
+                        }
                     } else if let message = message {
                         statusMessage = "Found \(message.records.count) NDEF message(s)"
                         DispatchQueue.main.async {
@@ -96,8 +106,10 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
                             }
                         }
                     } else {
-                        //TODO redirect to add contact view
                         statusMessage = "No NDEF message found."
+                        DispatchQueue.main.async {
+                            self.onEmptyTagDetected?()
+                        }
                     }
                     
                     session.alertMessage = statusMessage

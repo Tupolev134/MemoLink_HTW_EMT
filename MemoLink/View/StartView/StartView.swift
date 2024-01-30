@@ -10,6 +10,7 @@ struct StartView: View {
     @State private var alertMessage = ""
     @State private var navigateToContactView = false
     @State private var birthdayContacts: [String] = []
+    @State private var showAddContactView = false
     
     var body: some View {
         NavigationStack {
@@ -54,13 +55,7 @@ struct StartView: View {
             }
             .onAppear {
                 fetchBirthdayContacts()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    if nfcDataHandler.lastScannedUUID != nil {
-                        navigateToContactView = true
-                    } else {
-                        startScanning()
-                    }
-                }
+                setupNFCReadManager()
             }
             .onChange(of: nfcDataHandler.lastScannedUUID) { _ in
                 if nfcDataHandler.lastScannedUUID != nil {
@@ -86,6 +81,12 @@ struct StartView: View {
             ) {
                 EmptyView()
             }
+            NavigationLink(
+                destination: AddNfcTagToContactView(),
+                isActive: $showAddContactView
+            ) {
+                EmptyView()
+            }
         }
     }
     
@@ -108,6 +109,24 @@ struct StartView: View {
                 }
             }
         }
+    
+    private func setupNFCReadManager() {
+        nfcReadManager.onAlert = { title, message in
+            alertTitle = title
+            alertMessage = message
+            showingAlert = true
+        }
+
+        nfcReadManager.onEmptyTagDetected = {
+            showAddContactView = true
+        }
+
+        if nfcDataHandler.lastScannedUUID != nil {
+            navigateToContactView = true
+        } else {
+            startScanning()
+        }
+    }
 }
 
 struct StartView_Previews: PreviewProvider {

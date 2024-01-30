@@ -9,10 +9,16 @@ struct StartView: View {
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     @State private var navigateToContactView = false
+    @State private var birthdayContacts: [String] = []
     
     var body: some View {
         NavigationStack {
             VStack {
+                if !birthdayContacts.isEmpty {
+                    Text("Happy Birthday: \(birthdayContacts.joined(separator: ", "))")
+                        .font(.headline)
+                        .padding()
+                }
                 Spacer()
                 Image(systemName: "arrow.down")
                     .resizable()
@@ -20,7 +26,7 @@ struct StartView: View {
                     .frame(width: 200, height: 200)
                     .foregroundColor(.accentColor)
                     .padding(.bottom,60)
-    
+                
                 Spacer()
                 
                 Button(action: {startScanning()}, label: {
@@ -47,6 +53,7 @@ struct StartView: View {
                 }
             }
             .onAppear {
+                fetchBirthdayContacts()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     if nfcDataHandler.lastScannedUUID != nil {
                         navigateToContactView = true
@@ -90,6 +97,17 @@ struct StartView: View {
         }
         nfcReadManager.beginScanning()
     }
+    
+    private func fetchBirthdayContacts() {
+            CNContactsController.shared.fetchContactsHavingBirthdayToday { result in
+                switch result {
+                case .success(let contacts):
+                    self.birthdayContacts = contacts.map { "\($0.givenName) \($0.familyName)" }
+                case .failure(let error):
+                    print("Error fetching birthday contacts: \(error)")
+                }
+            }
+        }
 }
 
 struct StartView_Previews: PreviewProvider {

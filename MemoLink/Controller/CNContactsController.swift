@@ -132,4 +132,32 @@ class CNContactsController {
             }
         }
     }
+    
+    func fetchContactsHavingBirthdayToday(completion: @escaping (Result<[CNContact], Error>) -> Void) {
+        let todayComponents = Calendar.current.dateComponents([.day, .month], from: Date())
+        
+        let keysToFetch: [CNKeyDescriptor] = [
+            CNContactGivenNameKey as CNKeyDescriptor,
+            CNContactFamilyNameKey as CNKeyDescriptor,
+            CNContactBirthdayKey as CNKeyDescriptor
+        ]
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            var birthdayContacts: [CNContact] = []
+            
+            let request = CNContactFetchRequest(keysToFetch: keysToFetch)
+            try? self.store.enumerateContacts(with: request) { contact, _ in
+                if let birthday = contact.birthday,
+                   birthday.day == todayComponents.day,
+                   birthday.month == todayComponents.month {
+                    birthdayContacts.append(contact)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                completion(.success(birthdayContacts))
+            }
+        }
+    }
+
 }

@@ -11,6 +11,25 @@ class ContactStorageController: ObservableObject {
         load()
     }
     
+    func handleCall(for contactID: UUID, callLimit: Int, cooldownDuration: Int) {
+        guard let index = contacts.firstIndex(where: { $0.id == contactID }) else { return }
+
+        var contact = contacts[index]
+        if contact.callCount < callLimit {
+            contact.callCount += 1
+            if contact.callCount == callLimit {
+                contact.cooldownEnds = Date().addingTimeInterval(Double(cooldownDuration))
+            }
+        } else if let cooldownEnds = contact.cooldownEnds, Date() > cooldownEnds {
+            contact.callCount = 0
+            contact.cooldownEnds = nil
+        } else {
+            return
+        }
+        contacts[index] = contact
+        save()
+    }
+    
     private func save() {
         do {
             let data = try JSONEncoder().encode(contacts)
@@ -27,6 +46,13 @@ class ContactStorageController: ObservableObject {
             try data.write(to: fileURL)
         } catch {
             print("Error saving contacts: \(error)")
+        }
+    }
+    
+    func updateContact(updatedContact: Contact) {
+        if let index = contacts.firstIndex(where: { $0.id == updatedContact.id }) {
+            contacts[index] = updatedContact
+            save()
         }
     }
     

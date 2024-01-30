@@ -34,7 +34,6 @@ class NFCWriteManager:NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
     /// - Tag: writeToTag
     func readerSession(_ session: NFCNDEFReaderSession, didDetect tags: [NFCNDEFTag]) {
         if tags.count > 1 {
-            // Restart polling in 500 milliseconds.
             let retryInterval = DispatchTimeInterval.milliseconds(500)
             session.alertMessage = "More than 1 tag is detected. Please remove all tags and try again."
             DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {

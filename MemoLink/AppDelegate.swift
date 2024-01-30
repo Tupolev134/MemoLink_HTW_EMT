@@ -19,12 +19,9 @@ class NFCDataHandler: ObservableObject {
     func handleScannedUUID(_ uuid: String) {
         lastScannedUUID = nil
         lastScannedUUID = uuid
-        os_log("Scanned UUID updated: \(uuid)")
     }
 
     func extractUUID(from uri: String) -> String? {
-        // Implement logic to extract the UUID from the URI
-        // Assuming the URI is in the format "memolink://contact_id/{contactID}"
         let components = uri.components(separatedBy: "/")
         return components.last
     }

@@ -14,13 +14,28 @@ struct StartView: View {
         NavigationStack {
             VStack {
                 Spacer()
-                Image(systemName: "arrow.down.app.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 200, height: 200)
-                                    .foregroundColor(.accentColor)
-                                    .padding(.bottom, 300)
+                Image(systemName: "arrow.down")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 200, height: 200)
+                    .foregroundColor(.accentColor)
+                    .padding(.bottom,60)
+    
                 Spacer()
+                
+                Button(action: {startScanning()}, label: {
+                    Text("Scan Contact")
+                        .font(.system(size: 32))
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 200)
+                        .foregroundColor(Color("BG"))
+                        .background(Color.accentColor)
+                        .cornerRadius(10)
+                })
+                .padding()
+                
+                
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){

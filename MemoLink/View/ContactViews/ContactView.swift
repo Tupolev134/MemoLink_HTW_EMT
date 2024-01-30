@@ -20,7 +20,7 @@ struct ContactView: View {
             }
             Spacer()
             LargeButton(text: "Text \(firstName)") {
-                textContact()
+                showChat()
             }
             Spacer()
 //            LargeButton(text: "Show chat") {
@@ -60,13 +60,11 @@ struct ContactView: View {
         UIApplication.shared.open(url)
     }
     
-    func textContact(){
-        print("text")
-    }
-    
-    func showChat(){
-        let whatsappURL = URL(string: "https://wa.me/\(phoneNumber)")
-        
+    func showChat() {
+        let cleanNumber = phoneNumber.replacingOccurrences(of: " ", with: "")
+        let modifiedNumber = cleanNumber.hasPrefix("00") ? "+" + cleanNumber.dropFirst(2) : cleanNumber
+        let whatsappURL = URL(string: "https://wa.me/\(modifiedNumber)")
+
         if let url = whatsappURL, UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
         } else {

@@ -33,7 +33,7 @@ struct ScanNFCTagView: View {
     
     func startNfcSession() {
         let uuidString = UUID().uuidString
-        let customURL = "memolink://contact_id/\(uuidString)"
+        let customURL = "memolink://\(uuidString)"
         
         if let payload = NFCNDEFPayload.wellKnownTypeURIPayload(string: customURL) {
             nfcManager.message = NFCNDEFMessage(records: [payload])

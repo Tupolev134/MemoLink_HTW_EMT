@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>webcredentials:example.com</string>
+		<string>memolink</string>
 	</array>
 	<key>com.apple.developer.nfc.readersession.formats</key>
 	<array>

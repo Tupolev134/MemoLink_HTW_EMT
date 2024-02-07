@@ -20,7 +20,7 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
         }
 
         session = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
-        session?.alertMessage = "Hold your iPhone near the item to learn more about it."
+        session?.alertMessage = "Hold your phone close to a tag."
         session?.begin()
     }
     
@@ -66,18 +66,18 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
         let tag = tags.first!
         session.connect(to: tag, completionHandler: { (error: Error?) in
             if nil != error {
-                session.alertMessage = "Unable to connect to tag."
+                session.alertMessage = "That didnt work. Please try again"
                 session.invalidate()
                 return
             }
             
             tag.queryNDEFStatus(completionHandler: { (ndefStatus: NFCNDEFStatus, capacity: Int, error: Error?) in
                 if .notSupported == ndefStatus {
-                    session.alertMessage = "Tag is not NDEF compliant"
+                    session.alertMessage = "Please use a different tag"
                     session.invalidate()
                     return
                 } else if nil != error {
-                    session.alertMessage = "Unable to query NDEF status of tag"
+                    session.alertMessage = "That didnt work. Please try again"
                     session.invalidate()
                     return
                 }
@@ -87,16 +87,16 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
                     if let error = error {
                         if error.localizedDescription == "NDEF tag does not contain any NDEF message" {
                             // Error due to no NDEF message found
-                            statusMessage = "NDEF Tag does not contain any NDEF message. Choose a contact to associate it with"
+                            statusMessage = "Tag is not assigned to a contact yet"
                             DispatchQueue.main.async {
                                 self.onEmptyTagDetected?()
                             }
                         } else {
                             // Other errors
-                            statusMessage = "Fail to read NDEF from tag: \(error.localizedDescription)"
+                            statusMessage = "Fail to read from tag: \(error.localizedDescription)"
                         }
                     } else if let message = message {
-                        statusMessage = "Found \(message.records.count) NDEF message(s)"
+                        statusMessage = "Found a Person!"
                         DispatchQueue.main.async {
                             for payload in message.records {
                                 if let uri = self.extractURI(from: payload),
@@ -106,7 +106,7 @@ class NFCReadManager: NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
                             }
                         }
                     } else {
-                        statusMessage = "No NDEF message found."
+                        statusMessage = "Tag is not assigned to a contact yet"
                         DispatchQueue.main.async {
                             self.onEmptyTagDetected?()
                         }

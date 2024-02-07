@@ -19,10 +19,7 @@ class NFCWriteManager:NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
         }
         session = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
         
-        print(session.debugDescription)
-        print(message.records)
-        
-        session?.alertMessage = "Hold your iPhone near an NDEF tag to write the message."
+        session?.alertMessage = "Hold your phone close to a tag."
         session?.begin()
     }
     
@@ -46,37 +43,37 @@ class NFCWriteManager:NSObject, NFCNDEFReaderSessionDelegate, ObservableObject {
         let tag = tags.first!
         session.connect(to: tag, completionHandler: { (error: Error?) in
             if nil != error {
-                session.alertMessage = "Unable to connect to tag."
+                session.alertMessage = "Unable to connect to tag"
                 session.invalidate()
                 return
             }
             
             tag.queryNDEFStatus(completionHandler: { (ndefStatus: NFCNDEFStatus, capacity: Int, error: Error?) in
                 guard error == nil else {
-                    session.alertMessage = "Unable to query the NDEF status of tag."
+                    session.alertMessage = "Unable to connect to tag"
                     session.invalidate()
                     return
                 }
 
                 switch ndefStatus {
                 case .notSupported:
-                    session.alertMessage = "Tag is not NDEF compliant."
+                    session.alertMessage = "Please use a different tag"
                     session.invalidate()
                 case .readOnly:
-                    session.alertMessage = "Tag is read only."
+                    session.alertMessage = "Please use a different tag"
                     session.invalidate()
                 case .readWrite:
                     tag.writeNDEF(self.message, completionHandler: { (error: Error?) in
                         if nil != error {
-                            session.alertMessage = "Write NDEF message fail: \(error!)"
+                            session.alertMessage = "That did not work. Please try again"
                         } else {
-                            session.alertMessage = "Write NDEF message successful."
+                            session.alertMessage = "Added contact to the tag"
                             self.completion?(true, nil)
                         }
                         session.invalidate()
                     })
                 @unknown default:
-                    session.alertMessage = "Unknown NDEF tag status."
+                    session.alertMessage = "That did not work. Please try again"
                     session.invalidate()
                 }
             })
